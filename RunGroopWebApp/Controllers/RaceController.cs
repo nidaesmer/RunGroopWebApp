@@ -92,7 +92,7 @@ namespace RunGroopWebApp.Controllers
             var userRace = await _raceRepository.GetByIdAsyncNoTracking(id);
 
             if (userRace != null)
-                try
+                try 
                 {
                     await _photoService.DeletePhotoAsync(userRace.Image);
                 }

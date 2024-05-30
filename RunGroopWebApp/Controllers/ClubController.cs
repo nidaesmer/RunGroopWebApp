@@ -14,13 +14,15 @@ namespace RunGroopWebApp.Controllers
 
         private readonly IClubRepository _clubRepository;
         private readonly IPhotoService _photoService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
         //private kısmının cıkması ıcın contextte cıkan kutuyo  2.create ile ilerlemeliyiz
-        public ClubController(ApplicationDbContext context, IClubRepository clubRepository, IPhotoService photoService)
+        public ClubController(ApplicationDbContext context, IClubRepository clubRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
         {
             _clubRepository = clubRepository;
             _photoService = photoService;
+            _httpContextAccessor = httpContextAccessor;
         }
         //buraların amacı veritabanından verileri çekmek için geçerli 
         public async Task<IActionResult> Index()  // controller
@@ -40,7 +42,9 @@ namespace RunGroopWebApp.Controllers
         //create sayfası olusturmak
         public IActionResult Create()
         {
-            return View();
+            var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var createClubViewModel = new CreateClubViewModel { AppUserId = curUserId };
+            return View(createClubViewModel);
         }
 
         /*
@@ -68,6 +72,7 @@ namespace RunGroopWebApp.Controllers
                     Title = clubVM.Title,
                     Description = clubVM.Description,
                     Image = result.Url.ToString(),
+                    AppUserId = clubVM.AppUserId,
                     Address = new Address
                     {
                         Street = clubVM.Address.Street,

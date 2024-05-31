@@ -1,0 +1,35 @@
+﻿@using RunGroopWebApp.ViewModel
+@model UserDetailViewModel
+
+<div class="main-container">
+    <nav aria-label="breadcrumb" role="navigation" class="bg-primary text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Runners</a>
+                        </li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+                </div>
+                <!--end of col-->
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </nav>
+    <section class="bg-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    <div class="media">
+                        <img alt="Image" src="@Model.ProfileImageUrl" class="mr-md-5 avatar avatar-xlg">
+                        <div class="media-body">
+                            <div class="mb-3">
+                                <h1 class="h2 mb-2">@Model.UserName</h1>
+                                <span class="text-muted"><i class="icon-location"></i>@Model.Location</span>
